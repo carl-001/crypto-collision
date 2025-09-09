@@ -1,0 +1,64 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: ds0
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://172.22.0.7:3306/wk_block_game?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+        username: root
+        password: errtwer5.5*wreqwA@#
+    sharding:
+      tables:
+        gm_stock:
+          actual-data-nodes: ds0.gm_stock_2024,ds0.gm_stock_2025,ds0.gm_stock_2026,ds0.gm_stock_2027,ds0.gm_stock_2028,ds0.gm_stock_2029,ds0.gm_stock_2030
+          table-strategy:
+            standard:
+              sharding-column: sharding_time
+              precise-algorithm-class-name: com.jinny.block.config.YearShardingAlgorithm
+          gm_blocks:
+            actual-data-nodes: ds0.gm_blocks_2024_H1,ds0.gm_blocks_2024_H2,ds0.gm_blocks_2025_H1,ds0.gm_blocks_2025_H2,ds0.gm_blocks_2026_H1,ds0.gm_blocks_2026_H2,ds0.gm_blocks_2027_H1,ds0.gm_blocks_2027_H2,ds0.gm_blocks_2028_H1,ds0.gm_blocks_2028_H2,ds0.gm_blocks_2029_H1,ds0.gm_blocks_2029_H2,ds0.gm_blocks_2030_H1,ds0.gm_blocks_2030_H2,ds0.gm_blocks_2031_H1,ds0.gm_blocks_2031_H2,ds0.gm_blocks_2032_H1,ds0.gm_blocks_2032_H2,ds0.gm_blocks_2033_H1,ds0.gm_blocks_2033_H2,ds0.gm_blocks_2034_H1,ds0.gm_blocks_2034_H2
+            table-strategy:
+              standard:
+                sharding-column: sharding_time
+                precise-algorithm-class-name: com.jinny.block.config.BlockTimeShardingAlgorithm
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+  redis:
+    host: 172.22.0.12 # Redis服务器地址
+    database: 1 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password:
+    timeout: 3000ms # 连接超时时间（毫秒）
+
+logging:
+  level:
+    root: info
+    com.jinny.crypto: info
+
+cos:
+  secretId: IKIDJVUGoEgx23wfBnKm3CBxb6Uo2HRSLAwb
+  secretKey: jMrESXSDsStLdw7B93nMiy3vb4Kl5D9r
+  bucketName: iv-1324471854 #存储桶名称，格式一般是xxx-appId，比如cocktail-1300110000
+  region: ap-hongkong #地区，格式一般是ap-地区，比如上海：ap-shanghai
+
+sms:
+  url: http://sms.vaptcha.com/send
+  smsid: e2c90305984748b99735660bd3df8093
+  smskey: d6b04a10bc1242c480b4a6d32b6d8c1a
+  templateid: 0
+
+# xxl-job
+xxl:
+  job:
+    accessToken: default_token
+    admin:
+      addresses: http://${JOB_HOST:block-job-admin}:${JOB_PORT:8088}/xxl-job-admin
+    executor:
+      address: ''
+      appname: xxl-job-executor-sample
+      ip: ''
+      logpath: /home/logs/block-job-admin/jobhandler
+      logretentiondays: 30
+      port: 9999

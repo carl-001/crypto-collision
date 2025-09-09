@@ -1,0 +1,78 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: baccarat
+  profiles:
+    active: dev
+  #  main:
+  #    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 50MB
+  autoconfigure:
+    exclude:
+      - org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration
+
+management:
+  health:
+    db:
+      enabled: false
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    auto-mapping-behavior: partial
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: baccarat-secret #JWT加解密使用的密钥
+  expiration: 311040000 #JWT的超期限时间(60*60*24*30*12*10 - 10年)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+redis:
+  database: baccarat
+  key:
+    admin: 'ums:admin'
+    resourceList: 'ums:resourceList'
+  expire:
+    common: 86400 # 24小时
+
+udun:
+  gateway: https://sig10.udun.io
+  merchant-id: 318907
+  merchant-key: c73b8546816aba190f8a1c88d73c46a3
+  call-url: https://api.mixin6.com/api/back/notify
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v2/api-docs
+      - /doc.html
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /user/login
+      - /user/sms/code
+      - /user/register
+      - /user/noTokenSendEmailCode
+      - /user/forgetPassword
+      - /back/notify
+      - /user/cleanAllUserRedis
+      - /userProduct/createContractList
+      - /user/noTokenSendMobileCode
