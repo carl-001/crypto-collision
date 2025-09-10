@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinny.block.modules.crypto.mapper.CryptoInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jinny.crypto.modules.crypto.entity.CryptoInfo">
+        <id column="id" property="id" />
+        <result column="mnemonic" property="mnemonic" />
+        <result column="btc_address" property="btcAddress" />
+        <result column="btc_private_key" property="btcPrivateKey" />
+        <result column="eth_address" property="ethAddress" />
+        <result column="eth_private_key" property="ethPrivateKey" />
+        <result column="tron_address" property="tronAddress" />
+        <result column="tron_private_key" property="tronPrivateKey" />
+    </resultMap>
+
+</mapper>

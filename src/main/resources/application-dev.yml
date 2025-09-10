@@ -1,13 +1,10 @@
 spring:
-  shardingsphere:
-    datasource:
-      names: ds0
-      ds0:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://47.99.126.108:3307/wk_block_game?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
-        username: root
-        password: jjj64265155555.
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.99.126.108:3307/crypto_collision?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: jjj64265155555.
   redis:
     host: 47.99.126.108 # Redis服务器地址
     database: 10 # Redis数据库索引（默认为0）
@@ -19,29 +16,3 @@ logging:
   level:
     root: info
     com.jinny.crypto: debug
-
-cos:
-  secretId: IKIDJVUGoEgx23wfBnKm3CBxb6Uo2HRSLAwb
-  secretKey: jMrESXSDsStLdw7B93nMiy3vb4Kl5D9r
-  bucketName: iv-1324471854 #存储桶名称，格式一般是xxx-appId，比如cocktail-1300110000
-  region: ap-hongkong #地区，格式一般是ap-地区，比如上海：ap-shanghai
-
-sms:
-  url: http://sms.vaptcha.com/send
-  smsid: e2c90305984748b99735660bd3df8093
-  smskey: d6b04a10bc1242c480b4a6d32b6d8c1a
-  templateid: 0
-
-# xxl-job
-xxl:
-  job:
-    accessToken: default_token
-    admin:
-      addresses: http://${JOB_HOST:block-job-admin}:${JOB_PORT:8088}/xxl-job-admin
-    executor:
-      address: ''
-      appname: xxl-job-executor-sample
-      ip: ''
-      logpath: /home/logs/block-job-admin/jobhandler
-      logretentiondays: 30
-      port: 9999

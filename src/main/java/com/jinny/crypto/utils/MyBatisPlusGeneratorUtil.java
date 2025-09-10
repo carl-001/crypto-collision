@@ -27,7 +27,7 @@ public class MyBatisPlusGeneratorUtil {
         // 代码生成器
         AutoGenerator autoGenerator = new AutoGenerator(initDataSourceConfig());
         autoGenerator.global(initGlobalConfig(projectPath));
-        autoGenerator.packageInfo(initPackageConfig(projectPath,moduleName));
+        autoGenerator.packageInfo(initPackageConfig(projectPath, moduleName));
         autoGenerator.injection(initInjectionConfig(projectPath, moduleName));
         autoGenerator.template(initTemplateConfig());
         autoGenerator.strategy(initStrategyConfig(tableNames));
@@ -54,7 +54,7 @@ public class MyBatisPlusGeneratorUtil {
      */
     private static GlobalConfig initGlobalConfig(String projectPath) {
         return new GlobalConfig.Builder()
-                .outputDir(projectPath + "/block-api/src/main/java")
+                .outputDir(projectPath + "/src/main/java")
                 .author("admin")
                 .disableOpenDir()
                 .enableSwagger()
@@ -71,7 +71,7 @@ public class MyBatisPlusGeneratorUtil {
         String url = props.getStr("dataSource.url");
         String username = props.getStr("dataSource.username");
         String password = props.getStr("dataSource.password");
-        return new DataSourceConfig.Builder(url,username,password)
+        return new DataSourceConfig.Builder(url, username, password)
                 .dbQuery(new MySqlQuery())
                 .build();
     }
@@ -79,13 +79,13 @@ public class MyBatisPlusGeneratorUtil {
     /**
      * 初始化包配置
      */
-    private static PackageConfig initPackageConfig(String projectPath,String moduleName) {
+    private static PackageConfig initPackageConfig(String projectPath, String moduleName) {
         Props props = new Props("generator.properties");
         return new PackageConfig.Builder()
                 .moduleName(moduleName)
                 .parent(props.getStr("package.base"))
                 .entity("entity")
-                .pathInfo(Collections.singletonMap(OutputFile.mapperXml, projectPath + "/block-api/src/main/resources/mapper/" + moduleName))
+                .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "crypto-collision/src/main/resources/mapper/" + moduleName))
                 .build();
     }
 
@@ -102,7 +102,7 @@ public class MyBatisPlusGeneratorUtil {
      */
     private static StrategyConfig initStrategyConfig(String[] tableNames) {
         StrategyConfig.Builder builder = new StrategyConfig.Builder();
-                builder.entityBuilder()
+        builder.entityBuilder()
                 .naming(NamingStrategy.underline_to_camel)
                 .columnNaming(NamingStrategy.underline_to_camel)
                 .enableLombok()
