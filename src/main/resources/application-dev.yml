@@ -16,3 +16,4 @@ logging:
   level:
     root: info
     com.jinny.crypto: debug
+    org.bitcoinj.crypto.MnemonicCode: off
