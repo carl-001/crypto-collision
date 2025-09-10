@@ -35,9 +35,13 @@ public class CryptoInfo implements Serializable {
 
     private String ethPrivateKey;
 
+    private String ethAmount;
+
     private String tronAddress;
 
     private String tronPrivateKey;
+
+    private String tronAmount;
 
 
 }
